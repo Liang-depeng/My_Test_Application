@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".test.Test2Activity">
+
+
+    <FrameLayout
+        android:id="@+id/in11"
+        android:background="#3000"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.bh.ldp.myhuiapplication.test.TestView
+            android:id="@+id/center"
+            android:background="#5000"
+            android:layout_width="300dp"
+            android:layout_height="300dp">
+
+            <TextView
+                android:id="@+id/out"
+                android:background="#9000"
+                android:layout_width="150dp"
+                android:layout_height="150dp" />
+
+        </com.bh.ldp.myhuiapplication.test.TestView>
+
+    </FrameLayout>
+</LinearLayout>

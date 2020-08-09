@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/cai_details_iv"
+        android:layout_width="200dp"
+        android:layout_height="180dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:scaleType="fitXY" />
+
+    <TextView
+        android:id="@+id/cai_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#000000"
+        android:textSize="20sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/textView5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="类型：" />
+
+        <TextView
+            android:id="@+id/type_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/textView5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="简介：" />
+
+        <TextView
+            android:id="@+id/content_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/textView5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="建议食用人数：" />
+
+        <TextView
+            android:id="@+id/eat_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp">
+
+        <TextView
+            style="@style/textView5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="准备时间：" />
+
+        <TextView
+            android:id="@+id/prepare_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp">
+
+        <TextView
+            style="@style/textView5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="做饭时间：" />
+
+        <TextView
+            android:id="@+id/cooking_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp" />
+
+    </LinearLayout>
+
+
+    <TextView
+        style="@style/textView5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="选材用料" />
+
+    <ListView
+        android:id="@+id/headListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@null"
+        android:overScrollMode="never"
+        android:paddingLeft="10dp" />
+
+</LinearLayout>
