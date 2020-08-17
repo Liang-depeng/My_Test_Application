@@ -1,6 +1,7 @@
 package com.example.my_application.test
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -43,6 +44,9 @@ class TestActivity : AppCompatActivity(), MyIntentService.ReceiveListener {
         constellation_ay.setOnClickListener {
             startActivity(Intent(this, ConstellationActivity::class.java))
         }
+        share_test.setOnClickListener {
+            doShare()
+        }
 
         MyIntentService.setListener(this)
         service_test.setOnClickListener {
@@ -55,10 +59,27 @@ class TestActivity : AppCompatActivity(), MyIntentService.ReceiveListener {
         }
     }
 
-    private val handler :Handler =object :Handler(Looper.getMainLooper()){
+    private val SHARE_REQUEST_CODE = 12312
+
+    private fun doShare() {
+        val intent = Intent()
+        // 01 分享一段文字
+//        intent.setAction(Intent.ACTION_SEND).setType("text/plain")
+//            .putExtra(Intent.EXTRA_TEXT, "这是分享的文字")
+
+        // 02 分享一张图片
+        val uri = Uri.parse("android.resource://" + applicationContext.packageName + "/" + R.mipmap.ic_load_failed_1)
+        intent.setAction(Intent.ACTION_SEND).setType("image/*")
+            .putExtra(Intent.EXTRA_STREAM,uri)
+
+        Intent.createChooser(intent, "这是一个选择框")
+        startActivityForResult(intent, SHARE_REQUEST_CODE)
+    }
+
+    private val handler: Handler = object : Handler(Looper.getMainLooper()) {
         override fun handleMessage(msg: Message?) {
 
-                service_test_tv.text = msg?.obj as String
+            service_test_tv.text = msg?.obj as String
 
         }
     }
@@ -67,10 +88,12 @@ class TestActivity : AppCompatActivity(), MyIntentService.ReceiveListener {
 
         val message = Message.obtain()
         message.obj = s
-        handler.sendMessageDelayed(message,2000)
+        handler.sendMessageDelayed(message, 2000)
     }
 
-
-
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        val receiveIntent = data
+    }
 
 }
