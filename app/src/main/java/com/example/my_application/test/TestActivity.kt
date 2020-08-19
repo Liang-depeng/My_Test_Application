@@ -1,5 +1,6 @@
 package com.example.my_application.test
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -14,6 +15,7 @@ import com.example.my_application.other.PhoneActivity
 import com.example.my_application.train.TrainActivity
 
 import kotlinx.android.synthetic.main.activity_test.*
+import java.lang.Exception
 
 class TestActivity : AppCompatActivity(), MyIntentService.ReceiveListener {
 
@@ -62,18 +64,32 @@ class TestActivity : AppCompatActivity(), MyIntentService.ReceiveListener {
     private val SHARE_REQUEST_CODE = 12312
 
     private fun doShare() {
-        val intent = Intent()
-        // 01 分享一段文字
+        try {
+            val intent = Intent()
+            // 01 分享一段文字
 //        intent.setAction(Intent.ACTION_SEND).setType("text/plain")
 //            .putExtra(Intent.EXTRA_TEXT, "这是分享的文字")
 
-        // 02 分享一张图片
-        val uri = Uri.parse("android.resource://" + applicationContext.packageName + "/" + R.mipmap.ic_load_failed_1)
-        intent.setAction(Intent.ACTION_SEND).setType("image/*")
-            .putExtra(Intent.EXTRA_STREAM,uri)
+            // 02 分享一张图片
+//        val uri = Uri.parse("android.resource://" + applicationContext.packageName + "/" + R.mipmap.ic_load_failed_1)
+//        intent.setAction(Intent.ACTION_SEND).setType("image/*")
+//            .putExtra(Intent.EXTRA_STREAM,uri)
 
-        Intent.createChooser(intent, "这是一个选择框")
-        startActivityForResult(intent, SHARE_REQUEST_CODE)
+            // 02 分享一张图片 + 一段文字
+            val uri =
+                Uri.parse("android.resource://" + applicationContext.packageName + "/" + R.mipmap.ic_load_failed_1)
+            intent.setAction(Intent.ACTION_SEND).setType("image/*")
+                .putExtra(Intent.EXTRA_SUBJECT, "这是图片对应的文字")
+                .putExtra(Intent.EXTRA_STREAM, uri)
+
+            Intent.createChooser(intent, "这是一个选择框")
+            startActivityForResult(intent, SHARE_REQUEST_CODE)
+        }catch (e:ActivityNotFoundException){
+            e.printStackTrace()
+        }catch (e:Exception){
+            e.printStackTrace()
+        }
+
     }
 
     private val handler: Handler = object : Handler(Looper.getMainLooper()) {
