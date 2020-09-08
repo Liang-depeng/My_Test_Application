@@ -5,16 +5,18 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
         android:appComponentFactory="."
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
         tools:replace="android:appComponentFactory">
         <activity android:name=".test.Test2Activity">
             <!--            <intent-filter>-->
@@ -37,7 +39,8 @@
         <activity android:name=".MainActivity" />
         <activity
             android:name=".caipu.CaiPuActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
@@ -63,6 +66,7 @@
         </activity>
 
         <service android:name=".test.MyIntentService" />
+        <activity android:name=".other.HistoryTodayActivity" />
     </application>
 
 </manifest>

@@ -9,7 +9,7 @@ import bean.SortListBean;
 /**
  * created by Da Peng at 2019/10/12
  */
-public class CaiPuContract {
+public interface CaiPuContract {
 
     public interface View extends BaseView {
 

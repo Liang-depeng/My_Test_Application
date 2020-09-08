@@ -1,5 +1,6 @@
 package com.bh.ldp.lib_base.http;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Looper;
@@ -10,6 +11,7 @@ import com.bh.ldp.lib_base.Contants;
 import com.bh.ldp.lib_base.utils.AppUtils;
 import com.bh.ldp.lib_base.utils.LogUtils;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
@@ -27,6 +29,7 @@ import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import okhttp3.ResponseBody;
 
 /**
  * created by Da Peng at 2019/10/12
@@ -46,8 +49,12 @@ public class HttpHelper {
         return HttpHolder.INSTANCE;
     }
 
-    public void setCallBack(OnHttpResponseListner listener){
+    public void setCallBack(OnHttpResponseListner listener) {
         this.listener = listener;
+    }
+
+    public OnHttpResponseListner getListener() {
+        return listener;
     }
 
     private static class HttpHolder {
@@ -62,7 +69,7 @@ public class HttpHelper {
     public void startRequest(final RequestParams requestParams) {
 
         // 第一步获取okHttpClient对象
-       // okHttpClient = new OkHttpClient();
+        // okHttpClient = new OkHttpClient();
 
         // 第二步构建Request对象
         Request request = new Request.Builder()
@@ -90,7 +97,7 @@ public class HttpHelper {
 
                 e.printStackTrace();
 
-                LogUtils.e("okhttp",call.toString()+"  "+e.getLocalizedMessage()+e.getMessage());
+                LogUtils.e("okhttp", call.toString() + "  " + e.getLocalizedMessage() + e.getMessage());
 
                 // 请求失败
                 mHandler.post(new Runnable() {
@@ -107,8 +114,9 @@ public class HttpHelper {
                     // 子线程
                     String result = "";
 
-                    if (response.body() != null) {
-                        result = response.body().string();
+                    ResponseBody responseBody = response.body();
+                    if (responseBody != null) {
+                        result = responseBody.string();// string 不是 toString
                     }
 
                     Log.e("httpUrl", result);
@@ -177,7 +185,7 @@ public class HttpHelper {
     }
 
 
-    public void testAsyncTaskHttpRequest(final String requestUrl, final Class genericClass) {
+    public void testAsyncTaskHttpRequest(Context context, final String requestUrl, final Class genericClass) {
         HttpAsyncTaskTest httpAsyncTaskTest = new HttpAsyncTaskTest();
         httpAsyncTaskTest.execute(requestUrl, (Object) genericClass);
     }
@@ -185,7 +193,7 @@ public class HttpHelper {
     /**
      * 利用AsyncTask 实现异步网络请求 HttpURLConnection
      */
-    public class HttpAsyncTaskTest extends AsyncTask<Object, Integer, Object> {
+    public static class HttpAsyncTaskTest extends AsyncTask<Object, Integer, Object> {
 
         // 方法1：onPreExecute（）
         // 作用：执行 线程任务前的操作
@@ -244,7 +252,11 @@ public class HttpHelper {
 
         @Override
         protected void onPostExecute(Object object) {
-            listener.onSuccess(null, object);
+            try {
+                HttpHelper.getInstance().getListener().onSuccess(null, object);
+            } catch (Exception e) {
+                cancel(true);
+            }
         }
 
         // 方法5：onCancelled()

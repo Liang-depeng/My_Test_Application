@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.my_application.R
 import com.example.my_application.caipu.CaiPuActivity
 import com.example.my_application.other.ConstellationActivity
+import com.example.my_application.other.HistoryTodayActivity
 import com.example.my_application.other.PhoneActivity
 import com.example.my_application.train.TrainActivity
 
@@ -23,13 +24,6 @@ class TestActivity : AppCompatActivity(), MyIntentService.ReceiveListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test)
-//        button.visibility = View.GONE
-//        button.setOnClickListener {
-//            val intent = Intent("ldp.example.com.android_demo.studydemo.broadcastReceiver2")
-//            if (Build.VERSION.SDK_INT >= 26)
-//            intent.component = ComponentName("ldp.example.com.android_demo.studydemo.views","ldp.example.com.android_demo.studydemo.views.MyBroadcastReceiver2")
-//            sendBroadcast(intent)
-//        }
         initView()
     }
 
@@ -48,6 +42,9 @@ class TestActivity : AppCompatActivity(), MyIntentService.ReceiveListener {
         }
         share_test.setOnClickListener {
             doShare()
+        }
+        history_tv.setOnClickListener {
+            startActivity(Intent(this, HistoryTodayActivity::class.java))
         }
 
         MyIntentService.setListener(this)
@@ -84,9 +81,9 @@ class TestActivity : AppCompatActivity(), MyIntentService.ReceiveListener {
 
             Intent.createChooser(intent, "这是一个选择框")
             startActivityForResult(intent, SHARE_REQUEST_CODE)
-        }catch (e:ActivityNotFoundException){
+        } catch (e: ActivityNotFoundException) {
             e.printStackTrace()
-        }catch (e:Exception){
+        } catch (e: Exception) {
             e.printStackTrace()
         }
 

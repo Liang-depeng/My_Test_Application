@@ -28,11 +28,11 @@ public class CaiPuPresenter extends BasePresenter<CaiPuContract.View> implements
         mView.showLoadingDialog();
         RequestParams params = new RequestParams();
         params.setNetUrl(HttpUrl.CAI_URL);
-        params.put("keyword", keyword);
-        params.put("start", (page - 1) * 20);
-        params.put("num", page * 20);
-        params.setTag("bysearch");
         params.setParseClass(CaiPuBean.class);
+        params.put("keyword", keyword)
+                .put("start", (page - 1) * 20)
+                .put("num", page * 20)
+                .setTag("bysearch");
         mHttpHelper.startRequest(params);
     }
 
@@ -47,15 +47,16 @@ public class CaiPuPresenter extends BasePresenter<CaiPuContract.View> implements
     }
 
     @Override
-    public void requestSortData(int id,int page) {
+    public void requestSortData(int id, int page) {
         mView.showLoadingDialog();
         RequestParams params = new RequestParams();
         params.setNetUrl(HttpUrl.CAI_SORT_DETAILS_QUERY);
-        params.put("classid", id);
-        params.put("start", (page - 1) * 20);
-        params.put("num", page * 20);
-        params.setTag("byclassid");
         params.setParseClass(CaiPuBean.class);
+        params.put("classid", id)
+                .put("start", (page - 1) * 20)
+                .put("num", page * 20)
+                .setTag("byclassid");
+
         mHttpHelper.startRequest(params);
     }
 
@@ -63,7 +64,7 @@ public class CaiPuPresenter extends BasePresenter<CaiPuContract.View> implements
     @Override
     public void onSuccess(RequestParams requestParams, @NonNull Object obj) {
         if (obj instanceof CaiPuBean) {
-            mView.success((CaiPuBean) obj,requestParams);
+            mView.success((CaiPuBean) obj, requestParams);
         } else if (obj instanceof SortListBean) {
             mView.initDialog(((SortListBean) obj));
         }
@@ -73,7 +74,7 @@ public class CaiPuPresenter extends BasePresenter<CaiPuContract.View> implements
 
     @Override
     public void onFailed(RequestParams requestParams, @NonNull Object obj) {
-        mView.failed(obj,requestParams);
+        mView.failed(obj, requestParams);
         mView.hideLoadingDialog();
     }
 }

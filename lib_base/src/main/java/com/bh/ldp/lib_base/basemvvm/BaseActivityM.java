@@ -1,6 +1,7 @@
 package com.bh.ldp.lib_base.basemvvm;
 
 import android.app.ProgressDialog;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -91,7 +92,9 @@ public abstract class BaseActivityM extends AppCompatActivity implements BaseVie
     @Override
     public void setTitle(String title) {
         if (judgeHasTitleLayout()) {
-            ((TextView) getContentView().findViewById(R.id.title_tv)).setText(title);
+            TextView textView = (TextView) getContentView().findViewById(R.id.title_tv);
+            textView.setText(title);
+            textView.setTextColor(Color.WHITE);
         }
     }
 

@@ -7,7 +7,7 @@ package com.bh.ldp.lib_base.http;
 public abstract class BaseRequest {
 
     private String netUrl;
-    private Class parseClass = null;
+    private Class<?> parseClass = null;
     private Object tag;
 
     public Object getTag() {
@@ -26,11 +26,11 @@ public abstract class BaseRequest {
         this.netUrl = netUrl;
     }
 
-    public Class getParseClass() {
+    public Class<?> getParseClass() {
         return parseClass;
     }
 
-    public void setParseClass(Class parseClass) {
+    public void setParseClass(Class<?> parseClass) {
         this.parseClass = parseClass;
     }
 }

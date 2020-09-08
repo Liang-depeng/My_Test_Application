@@ -33,22 +33,30 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="phone query"
-        android:textAllCaps="false"/>
+        android:textAllCaps="false" />
 
     <Button
         android:id="@+id/constellation_ay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="constellation"
-        android:textAllCaps="false"/>
+        android:textAllCaps="false" />
 
     <Button
-        android:layout_marginTop="50dp"
+        android:id="@+id/history_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="history"
+        android:textAllCaps="false" />
+
+    <Button
         android:id="@+id/service_test"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:text="service_test"
-        android:textAllCaps="false"/>
+        android:textAllCaps="false" />
+
     <TextView
         android:id="@+id/service_test_tv"
         android:layout_width="wrap_content"
@@ -57,7 +65,7 @@
     <Button
         android:id="@+id/share_test"
         android:layout_width="wrap_content"
-        android:text="调用系统分享"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:text="调用系统分享" />
 
 </LinearLayout>

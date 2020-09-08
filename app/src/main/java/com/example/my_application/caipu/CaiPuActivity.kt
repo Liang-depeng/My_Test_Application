@@ -72,7 +72,6 @@ class CaiPuActivity : BaseActivity<CaiPuPresenter>(), CaiPuContract.View {
     override fun initData() {
         showProgressDialog()
         presenter.requestData(keyword, page)
-
     }
 
     override fun getLayoutResId(): Int {

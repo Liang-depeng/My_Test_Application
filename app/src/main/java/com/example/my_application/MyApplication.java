@@ -3,6 +3,7 @@ package com.example.my_application;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
+import androidx.multidex.MultiDex;
 
 import com.bh.ldp.lib_base.BaseApplication;
 import com.bh.ldp.lib_base.utils.LogUtils;
@@ -31,7 +32,7 @@ public class MyApplication extends BaseApplication {
         //但是现在一个大的应用,尤其是集成第三方库的,很容易超过这个数目,所以Android 5.0 之后的版本谷歌试用了名为ART的虚拟机来代替Dalvik虚拟机,ART支持从APK文件中加载多个.dex文件. 在安装期间,他会执行一个预编译操作,对.dex文件编译成一个个单一的.oat文件,在运行应用时去加载.oat文件,而不是.dex文件
         //
         // 这个错误只在(准确的说是5.0以下的机子)手机上才会出现,其他手机上不会出现.
-        //MultiDex.install(this);
+        MultiDex.install(this);
         super.onCreate();
         LogUtils.setDebug(true);
        // initJpush();

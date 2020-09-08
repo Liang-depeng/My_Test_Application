@@ -8,17 +8,39 @@ android {
 
     defaultConfig {
         applicationId "com.example.my_application"
-        minSdkVersion 16
+        minSdkVersion 19
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            abiFilters 'armeabi-v7a'//, 'x86'
+        }
+
+//        //只保留指定的和默认的资源
+//        resConfigs('zh-rCN')
+
     }
 
     buildTypes {
         release {
+            //开启资源压缩
+            shrinkResources true
+            // 混淆
+            minifyEnabled true
+            // 可调式
+            debuggable false
+            // Zipalign优化
+            zipAlignEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            shrinkResources false
             minifyEnabled false
+            debuggable true
+            zipAlignEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -34,6 +56,8 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+
 
     implementation project(path: ':lib_base')
 
